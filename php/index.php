@@ -39,14 +39,14 @@ function getAddressInfo($address)
 
 	$data = [];
 	foreach ($results as $result) {
-		$pos = $result['GeoObject']['Point']['pos'];
+		$pos = urlencode($result['GeoObject']['Point']['pos']);
 
-		$house = getGeoInfo('geocode=' . urlencode($pos) . '&kind=house')[0];
-		$street = getGeoInfo('geocode=' . urlencode($pos) . '&kind=street')[0];
-		$district = getGeoInfo('geocode=' . urlencode($pos) . '&kind=district')[0];
+		$house = getGeoInfo('geocode=' . $pos . '&kind=house')[0];
+		$street = getGeoInfo('geocode=' . $pos . '&kind=street')[0];
+		$district = getGeoInfo('geocode=' . $pos . '&kind=district')[0];
 
 		$metro = [];	
-		$metroStations = getGeoInfo('geocode=' . urlencode($pos) . '&kind=metro&results=5');
+		$metroStations = getGeoInfo('geocode=' . $pos . '&kind=metro&results=5');
 		foreach ($metroStations as $metroStation) {
 			$metro[] = $metroStation['GeoObject']['name'];
 		}
