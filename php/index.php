@@ -33,9 +33,9 @@ function getGeoInfo($query)
  */
 function getAddressInfo($address)
 {
-	$address = APP_ENV['prefix'] . $address;
+	$address = urlencode(APP_ENV['prefix'] . $address);
 
-	$results = getGeoInfo('geocode=' . urlencode($address) . '&results=10');
+	$results = getGeoInfo('geocode=' . $address . '&results=10');
 
 	$data = [];
 	foreach ($results as $result) {
